@@ -40,14 +40,16 @@ while True:
   except serial.SerialException:
     connect_sensors()
     continue
-  if reading[0] == 'DTH22':
+  if reading[0] == 'DHT22':
     try:
       humidity = float(reading[2])
       temperature = float(reading[5])
     except ValueError:
       print 'Bad humidity value'
       continue
+
     print "Humidity: %.1f% - Temperature %.1fC - [%.1f%, %.1f%]" % (humidity, temperature, LOW, HIGH)
+
     try:
       if humidity < LOW:
         humidifer.write('1')
@@ -58,4 +60,4 @@ while True:
       continue
 
   elif reading[0] == 'Dust':
-    print ' '.join(reading),
+    print ' '.join(reading)
