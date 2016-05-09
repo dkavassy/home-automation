@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import serial, io, time, sys
 
-HIGH = sys.argv[1]
-LOW = sys.argv[2]
+HIGH = float(sys.argv[1])
+LOW = float(sys.argv[2])
 
 sensors = None
 humidifer = None
