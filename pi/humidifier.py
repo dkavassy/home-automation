@@ -21,12 +21,12 @@ def connect_sensors():
   global sensors
   print 'Connecting sensors... ',
   try:
-  sensors_raw = serial.Serial('/dev/rfcomm0', 9600)
+    sensors_raw = serial.Serial('/dev/rfcomm0', 9600)
 
-  sensors = io.TextIOWrapper(io.BufferedRWPair(sensors_raw, sensors_raw, 1),  
+    sensors = io.TextIOWrapper(io.BufferedRWPair(sensors_raw, sensors_raw, 1),  
                                    newline = '\n',
                                    line_buffering = True)
-  print 'OK'
+    print 'OK'
   except:
     time.sleep(10)
     connect_sensors()
