@@ -5,13 +5,13 @@ HIGH = float(sys.argv[1])
 LOW = float(sys.argv[2])
 
 sensors = None
-humidifer = None
+humidifier = None
 
 def connect_humidifier():
-  global humidifer
-  print 'Connecting humidifer... ',
+  global humidifier
+  print 'Connecting humidifier... ',
   try:
-    humidifer = serial.Serial('/dev/rfcomm1', 9600)
+    humidifier = serial.Serial('/dev/rfcomm1', 9600)
     print 'OK'
   except serial.SerialException:
     time.sleep(10)
@@ -52,9 +52,9 @@ while True:
 
     try:
       if humidity < LOW:
-        humidifer.write('1')
+        humidifier.write('1')
       elif  humidity > HIGH:
-        humidifer.write('0')
+        humidifier.write('0')
     except serial.SerialException:
       connect_humidifier()
       continue
