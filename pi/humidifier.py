@@ -13,7 +13,7 @@ def connect_humidifier():
   try:
     humidifer = serial.Serial('/dev/rfcomm1', 9600)
     print 'OK'
-  except:
+  except serial.SerialException:
     time.sleep(10)
     connect_humidifier()
 
@@ -27,7 +27,7 @@ def connect_sensors():
                                    newline = '\n',
                                    line_buffering = True)
     print 'OK'
-  except:
+  except serial.SerialException:
     time.sleep(10)
     connect_sensors()
 
@@ -37,14 +37,14 @@ connect_humidifier()
 while True:
   try:
     reading = sensors.readline().split()
-  except:
+  except serial.SerialException:
     connect_sensors()
     continue
   if reading[0] == 'DTH22':
     try:
       humidity = float(reading[2])
       temperature = float(reading[5])
-    except:
+    except ValueError:
       print 'Bad humidity value'
       continue
     print "Humidity: %.1f% - Temperature %.1fC - [%.1f%, %.1f%]" % (humidity, temperature, LOW, HIGH)
@@ -53,7 +53,7 @@ while True:
         humidifer.write('1')
       elif  humidity > HIGH:
         humidifer.write('0')
-    except:
+    except serial.SerialException:
       connect_humidifier()
       continue
 
