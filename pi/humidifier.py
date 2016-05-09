@@ -48,7 +48,7 @@ while True:
       print 'Bad humidity value'
       continue
 
-    print "Humidity: %.1f%% - Temperature %.1fC - [%.1f%, %.1f%]" % (humidity, temperature, LOW, HIGH)
+    print "Humidity: %.1f%% - Temperature %.1fC - [%.1f%%, %.1f%%]" % (humidity, temperature, LOW, HIGH)
 
     try:
       if humidity < LOW:
