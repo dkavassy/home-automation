@@ -1,8 +1,11 @@
+#include <SoftwareSerial.h>
 #include "DHT.h"
 
 #define DHT_PIN 2
 
 DHT dht22(DHT_PIN, DHT22);
+
+SoftwareSerial softSerial(10, 11); // RX, TX
 
 struct options {
   const int dustMeasurePin;
@@ -37,7 +40,7 @@ float averageDustDensity = 0.0;
 int numDustMeasurements = 0;
 
 void setup(){
-  Serial.begin(9600);
+  softSerial.begin(9600);
   dht22.begin();
   pinMode(options.dustLedPowerPin, OUTPUT);
   pinMode(options.warningLedPin, OUTPUT);
@@ -98,14 +101,14 @@ Dust getDustMeasurement(int times) {
 void dust() {
   Dust dust = getDustMeasurement(10);
 
-  Serial.print("Dust Density [ug/m3]: ");
-  Serial.print(dust.density);
-  Serial.print(" (200s avg: ");
-  Serial.print(averageDustDensity);
-  Serial.print(")");
+  softSerial.print("Dust Density [ug/m3]: ");
+  softSerial.print(dust.density);
+  softSerial.print(" (200s avg: ");
+  softSerial.print(averageDustDensity);
+  softSerial.print(")");
   
-  Serial.print(" - Sensor Voltage: ");
-  Serial.println(dust.voltage);
+  softSerial.print(" - Sensor Voltage: ");
+  softSerial.println(dust.voltage);
 
   if (averageDustDensity > options.warningThreshold) {
     digitalWrite(options.warningLedPin, HIGH);
@@ -121,20 +124,20 @@ void humidity(void)
   float heat_index = dht22.computeHeatIndex(temperature, humidity, false);
 
   if (isnan(humidity) || isnan(temperature)) {
-    Serial.println("Failed to read from sensor!");
+    softSerial.println("Failed to read from sensor!");
     return;
   }
   
-  Serial.print("DHT22 Humidity: ");
-  Serial.print(humidity);
-  Serial.print(" %\t");
-  Serial.print("Temperature: ");
-  Serial.print(temperature);
-  Serial.print(" *C ");
-  Serial.print("\t");
-  Serial.print("Heat index: ");
-  Serial.print(heat_index);
-  Serial.println(" *C");
+  softSerial.print("DHT22 Humidity: ");
+  softSerial.print(humidity);
+  softSerial.print(" %\t");
+  softSerial.print("Temperature: ");
+  softSerial.print(temperature);
+  softSerial.print(" *C ");
+  softSerial.print("\t");
+  softSerial.print("Heat index: ");
+  softSerial.print(heat_index);
+  softSerial.println(" *C");
 }
 
 int loopCounter = 0;
