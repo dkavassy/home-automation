@@ -3,7 +3,7 @@
 
 #define DHT_PIN 2
 
-DHT dht(DHT_PIN, DHT11);
+DHT dht22(DHT_PIN, DHT22);
 
 SoftwareSerial softSerial(10, 11); // RX, TX
 
@@ -41,7 +41,7 @@ int numDustMeasurements = 0;
 
 void setup(){
   softSerial.begin(9600);
-  dht.begin();
+  dht22.begin();
   pinMode(options.dustLedPowerPin, OUTPUT);
   pinMode(options.warningLedPin, OUTPUT);
 }
@@ -119,16 +119,16 @@ void dust() {
 
 void humidity(void)
 {
-  float humidity = dht.readHumidity();
-  float temperature = dht.readTemperature();
-  float heat_index = dht.computeHeatIndex(temperature, humidity, false);
+  float humidity = dht22.readHumidity();
+  float temperature = dht22.readTemperature();
+  float heat_index = dht22.computeHeatIndex(temperature, humidity, false);
 
   if (isnan(humidity) || isnan(temperature)) {
     softSerial.println("Failed to read from sensor!");
     return;
   }
   
-  softSerial.print("DHT11 Humidity: ");
+  softSerial.print("DHT22 Humidity: ");
   softSerial.print(humidity);
   softSerial.print(" %\t");
   softSerial.print("Temperature: ");
