@@ -65,7 +65,7 @@ Dust getDustMeasurement(int times) {
   float calcVoltage = 0;
   float dustDensity = 0;
   float voMeasured = 0;
-  const float chracteristicFactor = 0.172; // == 0.29V / 0.1mg/m3 - from http://www.howmuchsnow.com/arduino/airquality/
+  const float chracteristicFactor = 0.172; // == 0.58V / 0.1mg/m3 - from http://www.howmuchsnow.com/arduino/airquality/
   Dust measurement;
   
   for (int i = 0; i < times; i++) {
