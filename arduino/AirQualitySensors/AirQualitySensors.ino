@@ -65,7 +65,7 @@ Dust getDustMeasurement(int times) {
   float calcVoltage = 0;
   float dustDensity = 0;
   float voMeasured = 0;
-  const float chracteristicFactor = 0.172;
+  const float chracteristicFactor = 0.172; // from http://www.howmuchsnow.com/arduino/airquality/
   Dust measurement;
   
   for (int i = 0; i < times; i++) {
@@ -78,8 +78,6 @@ Dust getDustMeasurement(int times) {
 
   measurement.voltage = calcVoltage;
   
-  // linear eqaution taken from http://www.howmuchsnow.com/arduino/airquality/
-  // Chris Nafis (c) 2012
   dustDensity = (chracteristicFactor * (calcVoltage - options.voltageOffset))*1000;
   if (dustDensity < 0.001) {
     dustDensity = 0.0;
