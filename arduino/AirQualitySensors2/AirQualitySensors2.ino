@@ -40,7 +40,7 @@ float averageDustDensity = 0.0;
 int numDustMeasurements = 0;
 
 void setup(){
-  softSerial.begin(9600);
+  softSerial.begin(38400);
   dht.begin();
   pinMode(options.dustLedPowerPin, OUTPUT);
   pinMode(options.warningLedPin, OUTPUT);
@@ -140,22 +140,8 @@ void humidity(void)
   softSerial.println(" *C");
 }
 
-int loopCounter = 0;
-
 void loop() {
-
-  if (loopCounter < 5) {
-    dust();  // takes 1.01sec
-  } else if (loopCounter == 5) {
-    humidity(); // takes little, needs min. 2s in between
-  }
-  
-  if (loopCounter >= 5) {
-    loopCounter = -1;
-  }
-
-  loopCounter += 1;
-  
-  delay(1000);
+  humidity(); // takes little, needs min. 2s in between
+  delay(10000);
 }
 

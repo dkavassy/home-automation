@@ -1,3 +1,5 @@
+// Use both CR & NL as line endings in Serial
+// Keep EN button pressed before powering up to enable AT mode
 #include <SoftwareSerial.h>
 
 SoftwareSerial mySerial(10, 11); // RX, TX
@@ -7,7 +9,7 @@ void setup() {
   Serial.begin(9600);
   
   // set the data rate for the SoftwareSerial port
-  mySerial.begin(9600);
+  mySerial.begin(38400);
 }
 
 void loop() { // run over and over
