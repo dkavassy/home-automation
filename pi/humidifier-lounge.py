@@ -11,7 +11,7 @@ def connect_humidifier():
   global humidifier
   print 'Connecting humidifier... ',
   try:
-    humidifier = serial.Serial('/dev/rfcomm1', 9600)
+    humidifier = serial.Serial('/dev/rfcomm3', 9600)
     print 'OK'
   except serial.SerialException:
     time.sleep(10)
@@ -21,7 +21,7 @@ def connect_sensors():
   global sensors
   print 'Connecting sensors... ',
   try:
-    sensors_raw = serial.Serial('/dev/rfcomm0', 9600)
+    sensors_raw = serial.Serial('/dev/rfcomm2', 9600)
 
     sensors = io.TextIOWrapper(io.BufferedRWPair(sensors_raw, sensors_raw, 1),  
                                    newline = '\n',
@@ -43,7 +43,7 @@ while True:
   except serial.SerialException:
     connect_sensors()
     continue
-  if reading[0] == 'DHT22':
+  if reading[0] == 'DHT11':
     try:
       humidity = float(reading[2])
       temperature = float(reading[5])
@@ -51,7 +51,7 @@ while True:
       print 'Bad humidity value'
       continue
 
-    print "Bedroom Humidity: %.1f%% - Temperature %.1fC - [%.1f%%, %.1f%%]" % (humidity, temperature, LOW, HIGH)
+    print "Lounge Humidity: %.1f%% - Temperature %.1fC - [%.1f%%, %.1f%%]" % (humidity, temperature, LOW, HIGH)
 
     try:
       if humidity < LOW:
@@ -63,4 +63,4 @@ while True:
       continue
 
   elif reading[0] == 'Dust':
-    print 'Bedroom %s' % (' '.join(reading))
+    print ' '.join(reading)
