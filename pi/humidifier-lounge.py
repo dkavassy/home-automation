@@ -43,7 +43,7 @@ while True:
   except serial.SerialException:
     connect_sensors()
     continue
-  if reading[0] == 'DHT11':
+  if reading[0] == 'Lounge':
     try:
       humidity = float(reading[2])
       temperature = float(reading[5])
