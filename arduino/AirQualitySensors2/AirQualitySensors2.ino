@@ -3,7 +3,7 @@
 
 #define DHT_PIN 2
 
-DHT dht(DHT_PIN, DHT11);
+DHT dht(DHT_PIN, DHT22);
 
 SoftwareSerial softSerial(10, 11); // RX, TX
 
@@ -128,7 +128,7 @@ void humidity(void)
     return;
   }
   
-  softSerial.print("DHT11 Humidity: ");
+  softSerial.print("Lounge Humidity: ");
   softSerial.print(humidity);
   softSerial.print(" %\t");
   softSerial.print("Temperature: ");
