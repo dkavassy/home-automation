@@ -9,6 +9,10 @@ There are three components
  * Humidifier controller - switches humidifier using signal received through Bluetooth serial (HC06)
  * Raspberry Pi - receives sensors readings and talks to the humidifer controller; the idea is that it will do much more e.g. make sensor data available on the web, record time series readings, visualise data etc
 
+New addition:
+ * Magnetic window open-close sensor with RF transmitter & ATTiny85
+ * RF receiver
+
 The circuits are in `pcb/` in [Fritzing](http://fritzing.org/) format
 
 Arduino sketches are found in `arduino/`
