@@ -2,6 +2,7 @@
 #include "DHT.h"
 
 #define DHT_PIN 2
+#define HUMIDITY_COMPENSATION 0.0 // temporary, for inaccurate sensor
 
 DHT dht(DHT_PIN, DHT22);
 
@@ -119,7 +120,7 @@ void dust() {
 
 void humidity(void)
 {
-  float humidity = dht.readHumidity();
+  float humidity = dht.readHumidity() + HUMIDITY_COMPENSATION;
   float temperature = dht.readTemperature();
   float heat_index = dht.computeHeatIndex(temperature, humidity, false);
 
