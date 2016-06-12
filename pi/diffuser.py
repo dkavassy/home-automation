@@ -15,9 +15,11 @@ def connect_humidifier():
 
 def on():
   humidifier.write('1')
+  print 'on'
 
 def off():
   humidifier.write('0')
+  print 'off'
 
 connect_humidifier()
 humidifier.write(' ')
